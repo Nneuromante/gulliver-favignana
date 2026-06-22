@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gulliver — Scuola Vela Favignana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --n1: #0b1829;   /* darkest navy */
+      --n2: #0f2040;   /* hero/sections navy */
+      --n3: #1a3358;   /* cards/mid navy */
+      --w:  #ffffff;
+      --ow: #f2f5f9;   /* off-white sections */
+      --g:  #6b7a96;   /* muted text */
+      --a:  #1a8ab5;   /* ocean blue accent */
+      --o:  #e8751a;   /* logo orange */
+      --ff-d: 'Montserrat', sans-serif;
+      --ff-b: 'Montserrat', sans-serif;
+      --nh: 76px;
+      --sec-py: 5.6rem;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--ff-b); background: var(--w); color: var(--n1); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    ::-webkit-scrollbar { width: 5px; } ::-webkit-scrollbar-track { background: var(--w); } ::-webkit-scrollbar-thumb { background: var(--a); border-radius: 3px; }
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 0 2.5rem; }
+    .rv { opacity: 0; transform: translateY(24px); transition: opacity .65s ease, transform .65s ease; }
+    .rv.on { opacity: 1; transform: none; }
+    .d1{transition-delay:.08s} .d2{transition-delay:.16s} .d3{transition-delay:.24s} .d4{transition-delay:.32s}
+
+    /* placeholder */
+    .ph { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .ph svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .ph-l { position: relative; z-index: 1; font-family: monospace; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: rgba(80,70,60,.65); text-align: center; padding: 8px 10px; line-height: 1.5; }
+
+    /* ── NAV ── */
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 300; height: var(--nh); display: flex; align-items: center; background: var(--w); box-shadow: 0 1px 20px rgba(11,24,41,.08); }
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 1.5rem; }
+    .nav-logo { display: inline-flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+    .nav-logo img { height: 52px; width: auto; display: block; }
+    .nav-pill { display: flex; gap: 0; padding: 0; }
+    .nav-pill a { font-size: .72rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; padding: .3rem .9rem; border-radius: 20px; transition: color .25s; white-space: nowrap; color: var(--g); }
+    .nav-pill a:hover { color: var(--o); }
+    .nav-cta { font-family: var(--ff-b); font-size: .78rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; padding: .65rem 1.6rem; border-radius: 3px; transition: background .3s; white-space: nowrap; background: var(--n2); color: #fff; border: 1px solid transparent; }
+    .nav-cta:hover { background: var(--o); }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-burger span { display: block; width: 22px; height: 2px; border-radius: 2px; transition: transform .3s, opacity .3s; background: var(--n1); }
+    .mob { position: fixed; top: var(--nh); left: 0; right: 0; z-index: 299; background: var(--w); padding: 1.5rem 2rem 2rem; display: flex; flex-direction: column; gap: .2rem; transform: translateY(-110%); transition: transform .4s cubic-bezier(.4,0,.2,1); box-shadow: 0 12px 32px rgba(11,24,41,.1); }
+    .mob.open { transform: none; }
+    .mob a { font-family: var(--ff-d); font-weight: 700; font-size: 1.5rem; color: var(--n1); text-decoration: none; padding: .55rem 0; border-bottom: 1px solid var(--ow); transition: color .25s; }
+    .mob a:hover { color: var(--o); }
+    .mob a.mc { color: var(--a); border: none; margin-top: .5rem; }
+
+    /* ── HERO ── */
+    .hero { position: relative; height: 100vh; min-height: 620px; background: var(--n2); overflow: hidden; display: flex; align-items: center; padding: calc(var(--nh) + 2rem) 0 5rem; }
+    .hero-img { position: absolute; inset: 0; }
+    .hero-img .ph { width: 100%; height: 100%; }
+    .hero-img .ph svg { position: absolute; inset: 0; }
+    .hero-grad { position: absolute; inset: 0; z-index: 1; background: linear-gradient(105deg, rgba(11,24,41,.72) 0%, rgba(11,24,41,.52) 42%, rgba(11,24,41,.18) 72%, rgba(11,24,41,.02) 100%); }
+    .hero-c { position: relative; z-index: 2; max-width: 680px; }
+    .hero-tag { font-size: .68rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.72); margin-bottom: 1.35rem; }
+    .hero-h { font-family: var(--ff-d); font-weight: 800; color: #fff; text-wrap: balance; }
+    .hero-h span { display: block; font-size: clamp(2.35rem, 5.8vw, 4.5rem); line-height: 1.02; letter-spacing: -.025em; font-weight: 800; }
+    .hero-h-yr { display: block; color: var(--o); letter-spacing: -.01em; }
+    .hero-sub { font-size: .98rem; font-weight: 600; line-height: 1.75; color: rgba(255,255,255,.88); max-width: 460px; margin-top: 1.65rem; }
+    .hero-btn { display: inline-flex; align-items: center; gap: .5rem; margin-top: 2.25rem; font-size: .8rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; padding: .9rem 2rem; background: var(--w); color: var(--n1); border-radius: 3px; transition: all .3s; }
+    .hero-btn:hover { background: var(--o); color: #fff; }
+    .hero-scroll { position: absolute; bottom: 2rem; right: 2.5rem; z-index: 2; display: flex; align-items: center; gap: .6rem; color: rgba(255,255,255,.4); font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; }
+    .hsl { display: inline-block; width: 1px; height: 32px; background: rgba(255,255,255,.3); }
+
+    /* ── ABOUT ── */
+    .about { padding: var(--sec-py) 0; background: var(--w); }
+    .about-g { display: grid; grid-template-columns: 1fr 1fr; gap: 4.2rem; align-items: center; }
+    .about-visual { display: flex; flex-direction: column; align-items: center; width: 100%; }
+    .about-logo { width: min(260px, 78%); max-width: 300px; height: auto; display: block; margin-bottom: 1.35rem; }
+    .imgs-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem; width: 100%; }
+    .imgs-wrap > * { border-radius: 4px; overflow: hidden; }
+    .img-carousel { position: relative; aspect-ratio: 1 / 1; overflow: hidden; background: var(--ow); }
+    .img-carousel-slide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .85s ease; }
+    .img-carousel-slide.on { opacity: 1; }
+    .img-carousel-dots { position: absolute; bottom: .55rem; left: 50%; transform: translateX(-50%); display: flex; gap: .35rem; z-index: 1; }
+    .img-carousel-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,.45); transition: background .3s, transform .3s; }
+    .img-carousel-dot.on { background: #fff; transform: scale(1.15); }
+    .stag { font-size: .68rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--a); margin-bottom: 1.15rem; display: block; }
+    .sh { font-family: var(--ff-d); font-weight: 800; font-size: clamp(2rem, 3.8vw, 3.15rem); line-height: 1.04; letter-spacing: -.025em; color: var(--n1); }
+    .sh > span { display: block; }
+    .so { color: var(--o); }
+    .sb { font-size: .93rem; line-height: 1.82; color: var(--g); margin-top: 1.1rem; }
+    .checks { list-style: none; margin-top: 1.5rem; display: flex; flex-direction: column; gap: .65rem; }
+    .checks li { display: flex; align-items: center; gap: .75rem; font-size: .9rem; color: var(--n1); font-weight: 500; }
+    .chk { width: 20px; height: 20px; border-radius: 50%; background: var(--n2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .chk svg { width: 10px; height: 10px; stroke: #fff; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .btn-dark { display: inline-flex; align-items: center; gap: .5rem; margin-top: 1.4rem; font-size: .8rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; padding: .9rem 2rem; background: var(--n2); color: #fff; border-radius: 3px; transition: all .3s; }
+    .btn-dark:hover { background: var(--o); }
+
+    /* ── RECENSIONI ── */
+    .reviews { background: var(--n2); padding: 4.9rem 0; }
+    .reviews-split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2.5rem, 5vw, 5rem); align-items: center; }
+    .reviews-label { font-size: .68rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #fff; margin-bottom: 1.25rem; }
+    .reviews-qmark { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(4.5rem, 9vw, 7rem); line-height: .75; color: var(--o); font-weight: 700; margin-bottom: .15rem; user-select: none; }
+    .reviews-headline { font-family: var(--ff-d); font-weight: 800; font-size: clamp(1.55rem, 2.6vw, 2.25rem); line-height: 1.18; color: #fff; margin: 0 0 1.15rem; letter-spacing: -.02em; }
+    .reviews-body { font-size: .88rem; line-height: 1.78; color: rgba(255,255,255,.55); max-width: 440px; margin-bottom: 1.35rem; }
+    .reviews-stars { display: flex; gap: .15rem; margin-bottom: 1.15rem; color: var(--a); font-size: .9rem; letter-spacing: .08em; }
+    .reviews-attr { font-size: .78rem; font-weight: 600; color: rgba(255,255,255,.72); letter-spacing: .03em; }
+    .reviews-media { position: relative; aspect-ratio: 1 / 1; max-width: 500px; margin-left: auto; width: 100%; overflow: hidden; border-radius: 4px; background: var(--n3); }
+    .reviews-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .reviews-nav { position: absolute; bottom: 1rem; right: 1rem; display: flex; flex-direction: column; gap: .4rem; z-index: 2; }
+    .reviews-nav-btn { width: 42px; height: 42px; border: none; background: #fff; color: var(--n1); font-size: 1.15rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .25s, color .25s; border-radius: 2px; }
+    .reviews-nav-btn:hover { background: var(--o); color: #fff; }
+
+    /* ── CORSI ── */
+    .corsi { padding: var(--sec-py) 0; background: var(--w); }
+    .corsi-hd { display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.75rem; }
+    .corsi-g { display: grid; grid-template-columns: repeat(3,1fr); gap: .75rem; }
+    .ccard { position: relative; border-radius: 6px; overflow: hidden; cursor: pointer; }
+    .ccard .ph { width: 100%; }
+    .ccard-grad { position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, rgba(8,16,30,.88) 0%, rgba(8,16,30,.2) 55%, transparent 100%); transition: opacity .4s; }
+    .ccard:hover .ccard-grad { opacity: .8; }
+    .ccard-body { position: absolute; bottom: 0; left: 0; right: 0; z-index: 2; padding: 1.5rem 1.6rem; }
+    .ccard-tag { font-size: .64rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: .4rem; }
+    .ccard-title { font-family: var(--ff-d); font-weight: 800; font-size: 1.45rem; color: #fff; line-height: 1.15; }
+    .ccard-desc { font-size: .8rem; color: rgba(255,255,255,.65); line-height: 1.6; margin-top: .4rem; max-height: 0; overflow: hidden; transition: max-height .4s ease, margin-top .3s; }
+    .ccard:hover .ccard-desc { max-height: 80px; }
+    .ccard-arrow { position: absolute; top: 1.1rem; right: 1.1rem; z-index: 2; width: 38px; height: 38px; background: rgba(11,24,41,.75); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1rem; transition: background .3s; }
+    .ccard:hover .ccard-arrow { background: var(--a); }
+    .see-all { font-size: .8rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; display: inline-flex; align-items: center; gap: .5rem; color: var(--n1); border: 1.5px solid var(--n1); padding: .7rem 1.6rem; border-radius: 40px; transition: all .3s; }
+    .see-all:hover { background: var(--o); border-color: var(--o); color: #fff; }
+
+    /* ── EGADI ── */
+    .egadi { background: var(--w); padding: var(--sec-py) 0; }
+    .egadi-g { display: grid; grid-template-columns: 1fr 1fr; gap: 4.2rem; align-items: center; }
+    .egadi-imgs { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem; }
+    .egadi-imgs > div { border-radius: 4px; overflow: hidden; }
+    .flist { list-style: none; margin-top: 1.75rem; display: flex; flex-direction: column; gap: .8rem; }
+    .flist li { display: flex; gap: .75rem; font-size: .9rem; color: var(--g); line-height: 1.6; }
+    .fdot { width: 6px; height: 6px; border-radius: 50%; background: var(--a); flex-shrink: 0; margin-top: .55rem; }
+    .flist strong { color: var(--n1); font-weight: 600; }
+
+    /* ── GALLERIA ── */
+    .gallery { padding: 0; background: var(--n1); overflow: hidden; }
+    .gallery-carousel { position: relative; width: 100%; height: clamp(340px, 72vh, 820px); overflow: hidden; background: var(--n2); }
+    .gallery-slide { position: absolute; inset: 0; opacity: 0; transition: opacity .9s ease; pointer-events: none; }
+    .gallery-slide.on { opacity: 1; pointer-events: auto; }
+    .gallery-slide img { width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; }
+    .gallery-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 44px; height: 44px; border: none; border-radius: 50%; background: rgba(11,24,41,.72); color: #fff; font-size: 1.45rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .25s, transform .25s; }
+    .gallery-arrow:hover { background: var(--a); transform: translateY(-50%) scale(1.05); }
+    .gallery-prev { left: 1rem; }
+    .gallery-next { right: 1rem; }
+    .gallery-bar { position: absolute; bottom: 0; left: 0; right: 0; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 1.25rem; background: linear-gradient(to top, rgba(11,24,41,.82), transparent); }
+    .gallery-caption { font-size: .82rem; color: rgba(255,255,255,.88); font-weight: 500; }
+    .gallery-count { font-size: .68rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.65); white-space: nowrap; }
+    .gallery-dots { display: flex; gap: .4rem; flex-wrap: wrap; justify-content: flex-end; }
+    .gallery-dot { width: 7px; height: 7px; border-radius: 50%; border: none; padding: 0; background: rgba(255,255,255,.4); cursor: pointer; transition: background .25s, transform .25s; }
+    .gallery-dot.on { background: #fff; transform: scale(1.15); }
+
+    /* ── CONTACT ── */
+    .contact { padding: var(--sec-py) 0; background: var(--ow); }
+    .contact-g { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4.2rem; align-items: start; }
+    .contact .sh { color: var(--n1); }
+    .cinfo { margin-top: 2rem; display: flex; flex-direction: column; gap: 1.25rem; }
+    .ci { display: flex; gap: .85rem; align-items: flex-start; }
+    .ci-dot { width: 36px; height: 36px; border-radius: 50%; background: var(--n2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ci-dot svg { width: 16px; height: 16px; stroke: #fff; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .ci-lbl { font-size: .65rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--g); }
+    .ci-val { font-size: .9rem; color: var(--n1); margin-top: .15rem; font-weight: 500; }
+    .form-box { background: var(--w); border-radius: 6px; padding: 2.5rem; box-shadow: 0 4px 32px rgba(11,24,41,.07); }
+    .fl { margin-bottom: .85rem; }
+    .fl label { display: block; font-size: .65rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--g); margin-bottom: .38rem; }
+    .fl input, .fl textarea, .fl select { width: 100%; background: var(--ow); border: 1.5px solid rgba(11,24,41,.1); border-radius: 3px; padding: .75rem 1rem; font-family: var(--ff-b); font-size: .9rem; color: var(--n1); outline: none; transition: border-color .2s; appearance: none; }
+    .fl input:focus, .fl textarea:focus, .fl select:focus { border-color: var(--a); background: #fff; }
+    .fl textarea { min-height: 100px; resize: vertical; }
+    .fl-2 { display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; }
+    .et { font-size: .72rem; color: #e5584e; margin-top: .25rem; }
+    .form-ok { text-align: center; padding: 3rem 1rem; }
+    .ok-i { width: 52px; height: 52px; border-radius: 50%; background: var(--n2); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; }
+    .ok-i svg { width: 22px; height: 22px; stroke: #fff; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .form-ok h3 { font-family: var(--ff-d); font-weight: 700; font-size: 1.3rem; color: var(--n1); }
+    .form-ok p { font-size: .88rem; color: var(--g); margin-top: .5rem; }
+
+    /* ── FOOTER ── */
+    .footer { position: relative; color: #fff; overflow: hidden; }
+    .footer-wave { display: block; width: 100%; height: clamp(72px, 8vw, 110px); line-height: 0; position: relative; z-index: 3; pointer-events: none; }
+    .footer-wave svg { display: block; width: 100%; height: 100%; }
+    .footer-body { position: relative; overflow: hidden; margin-top: calc(-1 * clamp(72px, 8vw, 110px)); z-index: 1; }
+    .footer-media { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+    .footer-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .footer-media::after { content: ''; position: absolute; inset: 0; background: rgba(11,24,41,.78); }
+    .footer-inner { position: relative; z-index: 1; padding: calc(clamp(72px, 8vw, 110px) + 2.5rem) 0 2.5rem; }
+    .footer-g { display: grid; grid-template-columns: minmax(180px, 1.15fr) repeat(3, minmax(0, 1fr)) minmax(210px, 1.05fr); gap: 2rem clamp(1.75rem, 3vw, 3rem); align-items: start; }
+    .fbrand { max-width: 280px; }
+    .ftag { font-size: .88rem; color: rgba(255,255,255,.78); line-height: 1.75; }
+    .fcta { display: inline-flex; margin-top: 1.35rem; font-size: .78rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; padding: .85rem 1.75rem; border-radius: 999px; background: var(--a); color: #fff; transition: background .3s; }
+    .fcta:hover { background: var(--o); color: #fff; }
+    .fcol h4 { font-size: .72rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #fff; margin-bottom: 1rem; }
+    .flinks { list-style: none; display: flex; flex-direction: column; gap: .55rem; }
+    .flinks a { font-size: .86rem; color: rgba(255,255,255,.68); text-decoration: none; transition: color .2s; }
+    .flinks a:hover { color: #fff; }
+    .fcontact { text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: .55rem; }
+    .fcontact-item { font-size: .78rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.88); }
+    .fcontact-note { margin-top: .75rem; max-width: 280px; font-size: .82rem; line-height: 1.7; color: rgba(255,255,255,.62); text-align: right; }
+    .fsocial { display: flex; gap: .55rem; margin-top: 1.35rem; }
+    .fsocial a { width: 38px; height: 38px; border-radius: 50%; background: var(--a); color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: transform .2s, background .2s; }
+    .fsocial a:hover { transform: translateY(-2px); background: #fff; color: var(--n1); }
+    .fsocial svg { width: 16px; height: 16px; fill: currentColor; }
+    .foot-b { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.12); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .5rem; }
+    .cp { font-size: .7rem; color: rgba(255,255,255,.45); }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:1024px){ .reviews-split{grid-template-columns:1fr;gap:2.5rem} .reviews-media{max-width:none;margin-left:0} .corsi-g{grid-template-columns:repeat(2,1fr)} .footer-g{grid-template-columns:repeat(3,1fr);gap:2rem 2.5rem} .fbrand{grid-column:1/-1;max-width:360px} .fcontact{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;text-align:left} .fcontact-note{text-align:left;max-width:420px;margin-top:0} .fsocial{margin-top:0} }
+    @media(max-width:768px){ .nav-pill,.nav-cta{display:none} .nav-burger{display:flex} .about-g,.egadi-g,.contact-g{grid-template-columns:1fr;gap:2.1rem} .corsi-g{grid-template-columns:1fr} .reviews-split{gap:2rem} .footer-g{grid-template-columns:1fr 1fr;gap:2rem} .fbrand{grid-column:1/-1} .fcontact{grid-column:1/-1;flex-direction:column;align-items:flex-start} .fcontact-note{max-width:none} .fsocial{margin-top:1rem} .hero{align-items:flex-end;padding:calc(var(--nh)+1.5rem) 0 3.5rem} .hero-h span{font-size:clamp(2rem,9vw,2.85rem)} .sh{font-size:clamp(1.75rem,7vw,2.5rem)} .fl-2{grid-template-columns:1fr} .gallery-arrow{width:38px;height:38px;font-size:1.2rem} .gallery-prev{left:.65rem} .gallery-next{right:.65rem} .gallery-bar{padding:.75rem .85rem;flex-wrap:wrap} .gallery-caption{font-size:.75rem;width:100%;order:2} .gallery-dots{order:1} }
+    @media(max-width:480px){ .footer-g{grid-template-columns:1fr} }
+  </style>
+  <script src="image-slot.js"></script>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect, useRef } = React;
+
+function useReveal(){ const ref=useRef(null); const[on,setOn]=useState(false); useEffect(()=>{ const obs=new IntersectionObserver(([e])=>{ if(e.isIntersecting){setOn(true);obs.disconnect();} },{threshold:.1}); if(ref.current)obs.observe(ref.current); return()=>obs.disconnect(); },[]); return[ref,on]; }
+
+function ImgCarousel({images, alts=[], interval=4200, delay=0}){
+  const[idx,setIdx]=useState(0);
+  useEffect(()=>{
+    if(images.length<=1) return;
+    let timer;
+    const start=setTimeout(()=>{
+      timer=setInterval(()=>setIdx(i=>(i+1)%images.length),interval);
+    },delay);
+    return()=>{ clearTimeout(start); if(timer) clearInterval(timer); };
+  },[images,interval,delay]);
+  return(
+    <div className="img-carousel">
+      {images.map((src,i)=>(
+        <img key={src} src={src} alt={alts[i]||''} className={`img-carousel-slide${i===idx?' on':''}`}/>
+      ))}
+      {images.length>1&&(
+        <div className="img-carousel-dots" aria-hidden="true">
+          {images.map((_,i)=><span key={i} className={`img-carousel-dot${i===idx?' on':''}`}/>)}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function GalleryCarousel({items, interval=5000}){
+  const[idx,setIdx]=useState(0);
+  const len=items.length;
+  const go=n=>setIdx((n+len)%len);
+  useEffect(()=>{
+    if(len<=1) return;
+    const t=setInterval(()=>setIdx(i=>(i+1)%len),interval);
+    return()=>clearInterval(t);
+  },[len,interval]);
+  const cur=items[idx];
+  return(
+    <div className="gallery-carousel">
+      {items.map(({src,alt,pos,fit},i)=>(
+        <div key={src} className={`gallery-slide${i===idx?' on':''}`}>
+          <img src={src} alt={alt} style={{objectPosition:pos||'center center',objectFit:fit||'cover'}}/>
+        </div>
+      ))}
+      {len>1&&<>
+        <button type="button" className="gallery-arrow gallery-prev" onClick={()=>go(idx-1)} aria-label="Immagine precedente">‹</button>
+        <button type="button" className="gallery-arrow gallery-next" onClick={()=>go(idx+1)} aria-label="Immagine successiva">›</button>
+        <div className="gallery-bar">
+          <span className="gallery-caption">{cur.alt}</span>
+          <span className="gallery-count">{idx+1} / {len}</span>
+          <div className="gallery-dots">
+            {items.map((_,i)=>(
+              <button key={i} type="button" className={`gallery-dot${i===idx?' on':''}`} onClick={()=>setIdx(i)} aria-label={`Vai all'immagine ${i+1}`}/>
+            ))}
+          </div>
+        </div>
+      </>}
+    </div>
+  );
+}
+
+function Ph({id, lbl, src, aspect='4/3', style={}}){
+  const coverStyle = {position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'cover',display:'block'};
+  const slot = src
+    ? <img src={src} alt={lbl} style={coverStyle}/>
+    : <image-slot id={id} placeholder={lbl} style={{...coverStyle}}/>;
+  if(aspect==='fill') return slot;
+  return(
+    <div style={{width:'100%',aspectRatio:aspect,position:'relative',overflow:'hidden',...style}}>
+      {slot}
+    </div>
+  );
+}
+
+/* Icons */
+const IcoPin=()=><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>;
+const IcoCal=()=><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></svg>;
+const IcoMail=()=><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>;
+const IcoPhone=()=><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.09 9.81 19.79 19.79 0 01.06 1.18 2 2 0 012.03 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>;
+const IcoCheck=()=><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>;
+
+function Navbar(){
+  const[open,setOpen]=useState(false);
+  const close=()=>setOpen(false);
+  const lks=[{l:'Storia',h:'#storia'},{l:'Corsi',h:'#corsi'},{l:'Le Egadi',h:'#egadi'},{l:'Galleria',h:'#galleria'},{l:'Contatti',h:'#contatti'}];
+  return(<>
+    <nav className="nav">
+      <div className="wrap">
+        <a href="#top" className="nav-logo"><img src="uploads/logo-gulliver.png" alt="Gulliver — Associazione Sportiva Dilettantistica"/></a>
+        <div className="nav-pill">{lks.map(({l,h})=><a key={l} href={h}>{l}</a>)}</div>
+        <a href="#contatti" className="nav-cta">Iscriviti</a>
+        <button className="nav-burger" onClick={()=>setOpen(o=>!o)} aria-label="Menu">
+          <span style={open?{transform:'rotate(45deg) translate(5px,5px)'}:{}}/>
+          <span style={open?{opacity:0}:{}}/>
+          <span style={open?{transform:'rotate(-45deg) translate(5px,-5px)'}:{}}/>
+        </button>
+      </div>
+    </nav>
+    <div className={`mob${open?' open':''}`}>
+      {lks.map(({l,h})=><a key={l} href={h} onClick={close}>{l}</a>)}
+      <a href="#contatti" className="mc" onClick={close}>Iscriviti →</a>
+    </div>
+  </>);
+}
+
+function Hero(){
+  return(
+    <section className="hero" id="top">
+      <div className="hero-img"><Ph id="hero-main" lbl="barca a vela — mare azzurro isole Egadi" src="uploads/86729173_2769202843128484_3915085246919344128_n.jpg" aspect="fill"/></div>
+      <div className="hero-grad"/>
+      <div className="hero-c wrap">
+        <p className="hero-tag">Scuola vela · Favignana · Isole Egadi</p>
+        <h1 className="hero-h">
+          <span>Scuola vela</span>
+          <span>a Favignana</span>
+          <span className="hero-h-yr">dal 1998</span>
+        </h1>
+        <p className="hero-sub">Portiamo bambini, ragazzi e adulti alla scoperta<br/>della vela nelle acque delle Isole Egadi.</p>
+        <a href="#corsi" className="hero-btn">Scopri i Corsi →</a>
+      </div>
+      <div className="hero-scroll"><span className="hsl"/>Scorri</div>
+    </section>
+  );
+}
+
+function About(){
+  const[ref,on]=useReveal();
+  const carousels=[
+    {imgs:['uploads/89342628_2809524742429627_6122163000670420992_n.jpg','uploads/82900201_2720320201350082_1941680428767248384_n.jpg','uploads/654296300_26233007932987978_5499749691394273174_n.jpg'], alts:['barca Aria — fondatori','equipaggio giovani — regata','vela alle Isole Egadi']},
+    {imgs:['uploads/82900201_2720320201350082_1941680428767248384_n.jpg','uploads/83259385_2720318374683598_4156118863110471680_n.jpg','uploads/83118431_2720317761350326_6301282524395995136_n.jpg'], alts:['equipaggio in regata','ragazzi a vela','corso bambini']},
+    {imgs:['uploads/87171882_2784439691604799_2592698497614479360_n.jpg','uploads/86729173_2769202843128484_3915085246919344128_n.jpg','uploads/87768377_2791681140880654_904454103185227776_n.jpg'], alts:['lezione a bordo','mare cristallino Egadi','panorama Isole Egadi']},
+    {imgs:['uploads/87291280_2784439788271456_9081358994752143360_n.jpg','uploads/89342628_2809524742429627_6122163000670420992_n.jpg','uploads/87171882_2784439691604799_2592698497614479360_n.jpg'], alts:['adulti a bordo','scuola vela Favignana','tramonto sul mare']},
+  ];
+  return(
+    <section className="about" id="storia" ref={ref}>
+      <div className="wrap">
+        <div className="about-g">
+          <div className={`about-visual rv${on?' on':''}`}>
+            <img className="about-logo" src="uploads/logo-gulliver-ciondolo.jpg" alt="Gulliver — Associazione Sportiva Dilettantistica"/>
+            <div className="imgs-wrap">
+              {carousels.map(({imgs,alts},i)=>(
+                <ImgCarousel key={i} images={imgs} alts={alts} interval={4500} delay={i*900}/>
+              ))}
+            </div>
+          </div>
+          <div className={`rv d2${on?' on':''}`}>
+            <p className="stag">— la nostra storia —</p>
+            <h2 className="sh"><span>La passione</span><span>per il mare</span><span>diventata <span className="so">missione</span></span></h2>
+            <p className="sb">A.S.D Gulliver nasce nel 1998 dalla volontà di Peppe Bianco e Jaco Campo di portare la vela a Favignana, trasformando una passione personale in un progetto dedicato all'isola e alle nuove generazioni.</p>
+            <p className="sb" style={{marginTop:'.6rem'}}>Da oltre vent'anni accompagniamo bambini, ragazzi e adulti nelle acque delle Egadi — uno dei luoghi più affascinanti del Mediterraneo.</p>
+            <ul className="checks">
+              {['Istruttori qualificati FIV','Piccoli gruppi per massima attenzione','Corsi per tutte le età e livelli'].map(t=>(
+                <li key={t}><span className="chk"><IcoCheck/></span>{t}</li>
+              ))}
+            </ul>
+            <a href="#contatti" className="btn-dark">Inizia Ora →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Recensioni(){
+  const[ref,on]=useReveal();
+  const[idx,setIdx]=useState(0);
+  const data=[
+    {name:'Maria R.', role:'Genitore · Corso Bambini', headline:'Non voleva più scendere dalla barca.', text:'Mio figlio ha fatto il corso estivo e non voleva più scendere dalla barca. Istruttori pazienti, ambiente sicuro e Favignana come palcoscenico — un\'esperienza che ripeteremo.', src:'uploads/83118431_2720317761350326_6301282524395995136_n.jpg'},
+    {name:'Luca T.', role:'Allievo · 15 anni', headline:'La vela qui è un\'altra cosa.', text:'Ho imparato a regolare le vele e a lavorare in equipaggio. Le uscite tra Favignana e Levanzo sono spettacolari — la vela qui è un\'altra cosa.', src:'uploads/83259385_2720318374683598_4156118863110471680_n.jpg'},
+    {name:'Elena & Marco', role:'Turisti · Corso Adulti', headline:'Ti fa sentire subito parte della barca.', text:'In una settimana abbiamo preso confidenza con il mare e con l\'isola vista dal basso. Gulliver ti fa sentire subito parte della barca, anche partendo da zero.', src:'uploads/87291280_2784439788271456_9081358994752143360_n.jpg'},
+    {name:'Giuseppe B.', role:'Allievo · Corso Estivo', headline:'Passione che si sente fin dal primo giorno.', text:'Professionalità e passione si sentono fin dal primo giorno. Piccoli gruppi, attenzione a ognuno e acque delle Egadi che parlano da sole.', src:'uploads/82900201_2720320201350082_1941680428767248384_n.jpg'},
+  ];
+  const len=data.length;
+  const cur=data[idx];
+  const prev=()=>setIdx(i=>(i-1+len)%len);
+  const next=()=>setIdx(i=>(i+1)%len);
+  return(
+    <section className="reviews" id="recensioni" ref={ref}>
+      <div className="wrap">
+        <div className={`reviews-split rv${on?' on':''}`}>
+          <div className="reviews-text">
+            <p className="reviews-label">— cosa dicono di noi —</p>
+            <div className="reviews-qmark" aria-hidden="true">&ldquo;</div>
+            <blockquote className="reviews-headline">&ldquo;{cur.headline}&rdquo;</blockquote>
+            <p className="reviews-body">{cur.text}</p>
+            <div className="reviews-stars" aria-label="5 stelle su 5">{'★'.repeat(5)}</div>
+            <p className="reviews-attr">{cur.name} — {cur.role}</p>
+          </div>
+          <div className="reviews-media">
+            <img src={cur.src} alt={cur.name}/>
+            <div className="reviews-nav">
+              <button type="button" className="reviews-nav-btn" onClick={next} aria-label="Testimonianza successiva">›</button>
+              <button type="button" className="reviews-nav-btn" onClick={prev} aria-label="Testimonianza precedente">‹</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Corsi(){
+  const[ref,on]=useReveal();
+  const data=[
+    {tag:'6–12 anni', title:'Corso Bambini', desc:'Primi passi in barca, gioco e scoperta del mare in totale sicurezza.', img:'bambini a vela — corso principianti', src:'uploads/83118431_2720317761350326_6301282524395995136_n.jpg'},
+    {tag:'13–17 anni', title:'Corso Ragazzi', desc:'Tecnica avanzata, regate e spirito di equipaggio tra i giovani dell\'isola.', img:'ragazzi regata — isole Egadi', src:'uploads/83259385_2720318374683598_4156118863110471680_n.jpg'},
+    {tag:'Adulti & Turisti', title:'Corso Adulti', desc:'Per chi vuole scoprire la vela o portarla ad un livello superiore.', img:'adulti a bordo — vela Mediterraneo', src:'uploads/87291280_2784439788271456_9081358994752143360_n.jpg'},
+  ];
+  return(
+    <section className="corsi" id="corsi" ref={ref}>
+      <div className="wrap">
+        <div className="corsi-hd">
+          <div className={`rv${on?' on':''}`}>
+            <p className="stag">— tipi di corso —</p>
+            <h2 className="sh"><span>Quale corso</span><span className="so">fa per te?</span></h2>
+          </div>
+          <a href="#contatti" className={`see-all rv d2${on?' on':''}`}>Iscriviti ora →</a>
+        </div>
+        <div className="corsi-g">
+          {data.map(({tag,title,desc,img,src},i)=>(
+            <div key={title} className={`ccard rv d${i+1}${on?' on':''}`}>
+              <Ph id={`corso-${i}`} lbl={img} src={src} aspect="3/4" style={{width:'100%'}}/>
+              <div className="ccard-grad"/>
+              <div className="ccard-body">
+                <div className="ccard-tag">{tag}</div>
+                <div className="ccard-title">{title}</div>
+                <div className="ccard-desc">{desc}</div>
+              </div>
+              <div className="ccard-arrow">→</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Egadi(){
+  const[ref,on]=useReveal();
+  const feats=[
+    {t:'Acque cristalline', d:'Navighiamo nelle acque più trasparenti del Mediterraneo, tra Favignana, Levanzo e Marettimo.'},
+    {t:'Biodiversità marina', d:'Un ecosistema unico: ogni uscita è un\'occasione per scoprire la natura sottomarina delle Egadi.'},
+    {t:'Rotte storiche', d:'Navighi sulle acque della Battaglia delle Egadi del 241 a.C., la prima grande battaglia navale della storia.'},
+    {t:'Venti favorevoli', d:'Condizioni ideali per ogni livello, dai principianti agli esperti, per tutta la stagione estiva.'},
+  ];
+  return(
+    <section className="egadi" id="egadi" ref={ref}>
+      <div className="wrap">
+        <div className="egadi-g">
+          <div className={`egadi-imgs rv${on?' on':''}`}>
+            <Ph id="egadi-1" lbl="panorama Isole Egadi — vista dal mare" src="uploads/87768377_2791681140880654_904454103185227776_n.jpg" aspect="1/1" style={{width:'100%'}}/>
+            <Ph id="egadi-2" lbl="fondali marini Favignana" src="uploads/86729173_2769202843128484_3915085246919344128_n.jpg" aspect="1/1" style={{width:'100%'}}/>
+            <Ph id="egadi-3" lbl="tramonto Levanzo — colori Mediterraneo" src="uploads/87171882_2784439691604799_2592698497614479360_n.jpg" aspect="1/1" style={{width:'100%'}}/>
+            <Ph id="egadi-4" lbl="vela alle Isole Egadi" src="uploads/654296300_26233007932987978_5499749691394273174_n.jpg" aspect="1/1" style={{width:'100%'}}/>
+          </div>
+          <div className={`rv d2${on?' on':''}`}>
+            <p className="stag">— il nostro mare —</p>
+            <h2 className="sh"><span><span className="so">Le Isole Egadi</span> —</span><span>un'aula senza confini</span></h2>
+            <p className="sb">Il mare non è soltanto uno sfondo, ma una parte integrante della vita quotidiana a Favignana. Imparare a veleggiare qui è un'esperienza unica e indimenticabile.</p>
+            <ul className="flist">
+              {feats.map(f=>(
+                <li key={f.t}><span className="fdot"/><span><strong>{f.t} — </strong>{f.d}</span></li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Galleria(){
+  const[ref,on]=useReveal();
+  const items=[
+    {src:'uploads/89342628_2809524742429627_6122163000670420992_n.jpg',alt:'Barca Aria — fondatori Peppe e Jaco',pos:'62% 68%'},
+    {src:'uploads/87768377_2791681140880654_904454103185227776_n.jpg',alt:'Panorama Isole Egadi — vista dal mare',pos:'48% 58%'},
+    {src:'uploads/82900201_2720320201350082_1941680428767248384_n.jpg',alt:'Equipaggio giovani in regata',pos:'44% 52%'},
+    {src:'uploads/86729173_2769202843128484_3915085246919344128_n.jpg',alt:'Mare cristallino di Favignana',pos:'50% 72%'},
+    {src:'uploads/83118431_2720317761350326_6301282524395995136_n.jpg',alt:'Corso bambini — primi passi in barca',pos:'28% 52%'},
+    {src:'uploads/83259385_2720318374683598_4156118863110471680_n.jpg',alt:'Corso ragazzi — regata tra le Egadi',pos:'58% 50%'},
+    {src:'uploads/87291280_2784439788271456_9081358994752143360_n.jpg',alt:'Corso adulti a bordo',fit:'contain'},
+    {src:'uploads/87171882_2784439691604799_2592698497614479360_n.jpg',alt:'Lezione di vela al tramonto',pos:'42% 68%'},
+    {src:'uploads/654296300_26233007932987978_5499749691394273174_n.jpg',alt:'Vela alle Isole Egadi',pos:'50% 58%'},
+    {src:'uploads/648890601_26107842295504543_6350789667420957433_n.jpg',alt:'Uscita in mare — scuola vela Gulliver',pos:'44% 56%'},
+    {src:'uploads/651012003_26134074679547971_7264768003055961002_n.jpg',alt:'Life on board — vita di bordo',fit:'contain'},
+    {src:'uploads/653704599_26197923196496452_7334301565136658338_n.jpg',alt:'Regata e spirito di squadra',pos:'36% 64%'},
+  ];
+  return(
+    <section className="gallery" id="galleria" ref={ref}>
+      <div className={`rv${on?' on':''}`}>
+        <GalleryCarousel items={items}/>
+      </div>
+    </section>
+  );
+}
+
+function Contact(){
+  const[ref,on]=useReveal();
+  const[f,setF]=useState({nome:'',email:'',corso:'',msg:''});
+  const[errs,setErrs]=useState({});
+  const[sent,setSent]=useState(false);
+  const set=(k,v)=>{ setF(p=>({...p,[k]:v})); setErrs(p=>{const n={...p};delete n[k];return n;}); };
+  const submit=e=>{ e.preventDefault(); const er={}; if(!f.nome.trim())er.nome='Obbligatorio'; if(!f.email.includes('@'))er.email='Email non valida'; if(!f.msg.trim())er.msg='Obbligatorio'; if(Object.keys(er).length){setErrs(er);return;} setSent(true); };
+  const info=[
+    {Icon:IcoPin, l:'Dove siamo', v:'Favignana, Isole Egadi — Sicilia'},
+    {Icon:IcoCal, l:'Stagione', v:'Giugno – Settembre'},
+    {Icon:IcoMail, l:'Email', v:'info@gulliver-vela.it'},
+    {Icon:IcoPhone, l:'Telefono', v:'+39 333 000 0000'},
+  ];
+  return(
+    <section className="contact" id="contatti" ref={ref}>
+      <div className="wrap">
+        <div className="contact-g">
+          <div className={`rv${on?' on':''}`}>
+            <p className="stag">— contatti —</p>
+            <h2 className="sh"><span>Pronto a prendere</span><span className="so">il largo?</span></h2>
+            <p className="sb" style={{marginTop:'1rem'}}>Scrivici per informazioni, iscrizioni o per saperne di più sulla vita in mare alle Isole Egadi.</p>
+            <div className="cinfo">
+              {info.map(({Icon,l,v})=>(
+                <div key={l} className="ci">
+                  <div className="ci-dot"><Icon/></div>
+                  <div><div className="ci-lbl">{l}</div><div className="ci-val">{v}</div></div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className={`rv d2${on?' on':''}`}>
+            <div className="form-box">
+              {sent?(
+                <div className="form-ok">
+                  <div className="ok-i"><svg viewBox="0 0 24 24" style={{width:22,height:22,stroke:'#fff',strokeWidth:2.5,fill:'none',strokeLinecap:'round',strokeLinejoin:'round'}}><polyline points="20 6 9 17 4 12"/></svg></div>
+                  <h3>Messaggio inviato!</h3>
+                  <p>Ti risponderemo presto. Il vento ti aspetta!</p>
+                </div>
+              ):(
+                <form onSubmit={submit} noValidate>
+                  <div className="fl fl-2">
+                    <div>
+                      <label>Nome *</label>
+                      <input type="text" placeholder="Mario Rossi" value={f.nome} onChange={e=>set('nome',e.target.value)} style={errs.nome?{borderColor:'#e5584e'}:{}}/>
+                      {errs.nome&&<div className="et">{errs.nome}</div>}
+                    </div>
+                    <div>
+                      <label>Email *</label>
+                      <input type="email" placeholder="mario@email.it" value={f.email} onChange={e=>set('email',e.target.value)} style={errs.email?{borderColor:'#e5584e'}:{}}/>
+                      {errs.email&&<div className="et">{errs.email}</div>}
+                    </div>
+                  </div>
+                  <div className="fl">
+                    <label>Corso di interesse</label>
+                    <select value={f.corso} onChange={e=>set('corso',e.target.value)}>
+                      <option value="">Seleziona un corso…</option>
+                      <option value="bambini">Corso Bambini (6–12 anni)</option>
+                      <option value="ragazzi">Corso Ragazzi (13–17 anni)</option>
+                      <option value="adulti">Corso Adulti</option>
+                      <option value="estivo">Corso Estivo Turisti</option>
+                      <option value="info">Informazioni generali</option>
+                    </select>
+                  </div>
+                  <div className="fl">
+                    <label>Messaggio *</label>
+                    <textarea placeholder="Scrivi qui la tua richiesta…" value={f.msg} onChange={e=>set('msg',e.target.value)} style={errs.msg?{borderColor:'#e5584e'}:{}}/>
+                    {errs.msg&&<div className="et">{errs.msg}</div>}
+                  </div>
+                  <button type="submit" className="btn-dark" style={{width:'100%',justifyContent:'center',marginTop:'.5rem'}}>Invia Messaggio →</button>
+                </form>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const IcoFb=()=><svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>;
+const IcoIg=()=><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>;
+const IcoYt=()=><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>;
+
+function Footer(){
+  const vidRef=useRef(null);
+  useEffect(()=>{ const v=vidRef.current; if(v){ v.muted=true; v.play().catch(()=>{});} },[]);
+  const cols=[
+    {t:'Scuola',ls:[['La Storia','#storia'],['I Corsi','#corsi'],['Le Egadi','#egadi'],['Galleria','#galleria'],['Contatti','#contatti']]},
+    {t:'Corsi',ls:[['Corso Bambini','#corsi'],['Corso Ragazzi','#corsi'],['Corso Adulti','#corsi'],['Corsi Estivi','#corsi']]},
+    {t:'Informazioni',ls:[['Come arrivare','#'],['Calendario','#'],['Regolamento ASD','#'],['Privacy Policy','#']]},
+  ];
+  return(
+    <footer className="footer">
+      <div className="footer-wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 110" preserveAspectRatio="none">
+          <path fill="var(--ow)" d="M0,0 L1440,0 L1440,58 C1320,58 1320,18 1200,18 C1080,18 1080,58 960,58 C840,58 840,18 720,18 C600,18 600,58 480,58 C360,58 360,18 240,18 C120,18 120,58 0,58 Z"/>
+        </svg>
+      </div>
+      <div className="footer-body">
+        <div className="footer-media" aria-hidden="true">
+          <video ref={vidRef} autoPlay muted loop playsInline poster="uploads/87171882_2784439691604799_2592698497614479360_n.jpg">
+            <source src="uploads/footer-sea.mp4" type="video/mp4"/>
+          </video>
+        </div>
+        <div className="wrap footer-inner">
+          <div className="footer-g">
+            <div className="fbrand">
+              <p className="ftag">Scuola Vela Favignana<br/>Isole Egadi · Sicilia<br/>Dal 1998</p>
+              <a href="#contatti" className="fcta">Iscriviti →</a>
+            </div>
+            {cols.map(c=>(
+              <div key={c.t} className="fcol">
+                <h4>{c.t}</h4>
+                <ul className="flinks">{c.ls.map(([l,h])=><li key={l}><a href={h}>{l}</a></li>)}</ul>
+              </div>
+            ))}
+            <div className="fcontact">
+              <div className="fcontact-item">Favignana, Isole Egadi — Sicilia</div>
+              <div className="fcontact-item">info@gulliver-vela.it</div>
+              <div className="fcontact-item">+39 333 000 0000</div>
+              <p className="fcontact-note">Scrivici per informazioni, iscrizioni o per saperne di più sulla vita in mare alle Isole Egadi.</p>
+              <div className="fsocial">
+                <a href="#" aria-label="Facebook"><IcoFb/></a>
+                <a href="#" aria-label="Instagram"><IcoIg/></a>
+                <a href="#" aria-label="YouTube"><IcoYt/></a>
+              </div>
+            </div>
+          </div>
+          <div className="foot-b">
+            <p className="cp">© 2025 A.S.D. Gulliver Scuola Vela Favignana — Tutti i diritti riservati</p>
+            <p className="cp">Isole Egadi · Sicilia · Italia</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+function App(){
+  return(<>
+    <Navbar/><Hero/><About/><Corsi/><Recensioni/><Egadi/><Galleria/><Contact/><Footer/>
+  </>);
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
