@@ -93,11 +93,51 @@
     .chk svg { width: 10px; height: 10px; stroke: #fff; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
     .btn-dark { display: inline-flex; align-items: center; gap: .5rem; margin-top: 1.4rem; font-size: .8rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; padding: .9rem 2rem; background: var(--n2); color: #fff; border-radius: 3px; transition: all .3s; }
     .btn-dark:hover { background: var(--o); }
+    button.btn-dark { border: none; cursor: pointer; font-family: inherit; }
+    .about-more { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .55s ease, margin-top .55s ease; margin-top: 0; }
+    .about-more.open { grid-template-rows: 1fr; margin-top: 2.5rem; }
+    .about-more-inner { overflow: hidden; }
+    .about-more-body { background: var(--ow); border-radius: 6px; padding: clamp(1.5rem, 3vw, 2.5rem); }
+    .about-more-top { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 3vw, 2.5rem); }
+    .about-more-body .sb { margin-top: 0; }
+    .about-more-body .sb + .sb { margin-top: .85rem; }
+    .about-milestones { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+    .about-milestones li { padding-left: 1rem; border-left: 2px solid var(--o); }
+    .about-milestones strong { display: block; font-family: var(--ff-d); font-size: 1.05rem; color: var(--n1); margin-bottom: .2rem; }
+    .about-milestones span { font-size: .88rem; line-height: 1.65; color: var(--g); }
+    .about-block { margin-top: 0; }
+    .about-block + .about-block { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(11,24,41,.08); }
+    #come-arrivare { scroll-margin-top: calc(var(--nh) + 1.5rem); }
+    .about-block-hd { display: grid; grid-template-columns: minmax(160px, 1fr) 1.35fr; gap: clamp(1.25rem, 3vw, 2.5rem); align-items: start; margin-bottom: 2rem; }
+    .about-block-title { font-family: var(--ff-d); font-weight: 800; font-size: clamp(1.55rem, 2.4vw, 2rem); letter-spacing: .1em; text-transform: uppercase; color: var(--n1); line-height: 1.08; margin: 0; }
+    .about-block-title::after { content: ''; display: block; width: 44px; height: 3px; background: var(--o); margin-top: .8rem; }
+    .about-block-intro { font-size: .9rem; line-height: 1.78; color: var(--n1); font-weight: 600; margin: 0; opacity: .82; }
+    .about-block-intro.quoted::before,
+    .about-block-intro.quoted::after { color: var(--o); font-weight: 800; opacity: 1; }
+    .about-block-intro.quoted::before { content: '\201C'; margin-right: .12em; }
+    .about-block-intro.quoted::after { content: '\201D'; margin-left: .08em; }
+    .about-team-g { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem 1.25rem; }
+    .about-location-g { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 3vw, 2.5rem); align-items: center; }
+    .about-location-details { display: flex; flex-direction: column; gap: 1rem; }
+    .about-location-item { display: flex; gap: .75rem; align-items: flex-start; font-size: .9rem; line-height: 1.65; color: var(--g); }
+    .about-location-item strong { display: block; font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--n1); margin-bottom: .15rem; }
+    .about-location-photo { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; display: block; }
+    .about-location-link { display: inline-flex; align-items: center; gap: .45rem; margin-top: .5rem; font-size: .78rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--a); text-decoration: none; transition: color .25s; }
+    .about-location-link:hover { color: var(--o); }
+    .egadi-more-g { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 3vw, 2.5rem); align-items: center; }
+    .egadi-more-photo { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 4px; display: block; }
+    .team-card { text-align: center; }
+    .team-photo { width: 118px; height: 118px; border-radius: 50%; object-fit: cover; margin: 0 auto .9rem; display: block; filter: grayscale(100%); transition: filter .35s; }
+    .team-card:hover .team-photo { filter: grayscale(0%); }
+    .team-name { font-family: var(--ff-d); font-weight: 700; font-size: 1rem; color: var(--n1); margin: 0 0 .35rem; }
+    .team-role { font-size: .78rem; line-height: 1.55; color: var(--g); max-width: 190px; margin: 0 auto; }
 
     /* ── RECENSIONI ── */
     .reviews { background: var(--n2); padding: 4.9rem 0; }
     .reviews-wrap { position: relative; }
     .reviews-split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2.5rem, 5vw, 5rem); align-items: center; padding: 0 3.25rem; }
+    .reviews-slide { animation: reviewFade .6s ease; }
+    @keyframes reviewFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
     .reviews-label { font-size: .68rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #fff; margin-bottom: 1.25rem; }
     .reviews-qmark { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(4.5rem, 9vw, 7rem); line-height: .75; color: var(--o); font-weight: 700; margin-bottom: .15rem; user-select: none; }
     .reviews-headline { font-family: var(--ff-d); font-weight: 800; font-size: clamp(1.55rem, 2.6vw, 2.25rem); line-height: 1.18; color: #fff; margin: 0 0 1.15rem; letter-spacing: -.02em; }
@@ -207,8 +247,8 @@
     .cp { font-size: .7rem; color: rgba(255,255,255,.45); }
 
     /* ── RESPONSIVE ── */
-    @media(max-width:1024px){ .reviews-split{grid-template-columns:1fr;gap:2.5rem;padding:0 2.75rem} .reviews-media{max-width:none;margin-left:0} .corsi-g{grid-template-columns:repeat(2,1fr)} .footer-g{grid-template-columns:repeat(3,1fr);gap:2rem 2.5rem} .fbrand{grid-column:1/-1;max-width:360px} .fcontact{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;text-align:left} .fcontact-note{text-align:left;max-width:420px;margin-top:0} .fsocial{margin-top:0} }
-    @media(max-width:768px){ .nav-pill,.nav-cta{display:none} .nav-burger{display:flex} .about-g,.egadi-g,.contact-g{grid-template-columns:1fr;gap:2.1rem} .corsi-g{grid-template-columns:1fr} .reviews-split{gap:2rem;padding:0 2.25rem} .reviews-arrow{width:38px;height:38px;font-size:1.2rem} .footer-g{grid-template-columns:1fr 1fr;gap:2rem} .fbrand{grid-column:1/-1} .fcontact{grid-column:1/-1;flex-direction:column;align-items:flex-start} .fcontact-note{max-width:none} .fsocial{margin-top:1rem} .hero{align-items:flex-end;padding:calc(var(--nh)+1.5rem) 0 3.5rem} .hero-h span{font-size:clamp(2rem,9vw,2.85rem)} .sh{font-size:clamp(1.75rem,7vw,2.5rem)} .fl-2{grid-template-columns:1fr} .gallery-arrow{width:38px;height:38px;font-size:1.2rem} .gallery-prev{left:.65rem} .gallery-next{right:.65rem} .gallery-bar{padding:.75rem .85rem;flex-wrap:wrap} .gallery-caption{font-size:.75rem;width:100%;order:2} .gallery-dots{order:1} }
+    @media(max-width:1024px){ .reviews-split{grid-template-columns:1fr;gap:2.5rem;padding:0 2.75rem} .reviews-media{max-width:none;margin-left:0} .corsi-g{grid-template-columns:repeat(2,1fr)} .about-team-g{grid-template-columns:repeat(2,1fr)} .about-location-g{grid-template-columns:1fr} .footer-g{grid-template-columns:repeat(3,1fr);gap:2rem 2.5rem} .fbrand{grid-column:1/-1;max-width:360px} .fcontact{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;text-align:left} .fcontact-note{text-align:left;max-width:420px;margin-top:0} .fsocial{margin-top:0} }
+    @media(max-width:768px){ .nav-pill,.nav-cta{display:none} .nav-burger{display:flex} .about-g,.egadi-g,.contact-g{grid-template-columns:1fr;gap:2.1rem} .about-more-top,.about-block-hd,.about-location-g,.egadi-more-g{grid-template-columns:1fr} .about-team-g{grid-template-columns:repeat(2,1fr)} .corsi-g{grid-template-columns:1fr} .reviews-split{gap:2rem;padding:0 2.25rem} .reviews-arrow{width:38px;height:38px;font-size:1.2rem} .footer-g{grid-template-columns:1fr 1fr;gap:2rem} .fbrand{grid-column:1/-1} .fcontact{grid-column:1/-1;flex-direction:column;align-items:flex-start} .fcontact-note{max-width:none} .fsocial{margin-top:1rem} .hero{align-items:flex-end;padding:calc(var(--nh)+1.5rem) 0 3.5rem} .hero-h span{font-size:clamp(2rem,9vw,2.85rem)} .sh{font-size:clamp(1.75rem,7vw,2.5rem)} .fl-2{grid-template-columns:1fr} .gallery-arrow{width:38px;height:38px;font-size:1.2rem} .gallery-prev{left:.65rem} .gallery-next{right:.65rem} .gallery-bar{padding:.75rem .85rem;flex-wrap:wrap} .gallery-caption{font-size:.75rem;width:100%;order:2} .gallery-dots{order:1} }
     @media(max-width:480px){ .footer-g{grid-template-columns:1fr} }
   </style>
   <script src="image-slot.js"></script>
@@ -346,11 +386,37 @@ function Hero(){
 
 function About(){
   const[ref,on]=useReveal();
+  const[more,setMore]=useState(false);
+  useEffect(()=>{
+    const openFromHash=()=>{
+      if(window.location.hash==='#come-arrivare') setMore(true);
+    };
+    openFromHash();
+    window.addEventListener('hashchange',openFromHash);
+    return()=>window.removeEventListener('hashchange',openFromHash);
+  },[]);
+  useEffect(()=>{
+    if(!more||window.location.hash!=='#come-arrivare') return;
+    const t=setTimeout(()=>{
+      document.getElementById('come-arrivare')?.scrollIntoView({behavior:'smooth',block:'start'});
+    },580);
+    return()=>clearTimeout(t);
+  },[more]);
   const carousels=[
     {imgs:['uploads/foto/storia/01/82900201_2720320201350082_1941680428767248384_n.jpg','uploads/foto/storia/01/image00072.jpeg','uploads/foto/storia/01/image00165.jpeg','uploads/foto/storia/01/sede-gulliver.jpg'], alts:['Gulliver — la nostra storia','Gulliver — la nostra storia','Gulliver — la nostra storia','Gulliver — sede Favignana']},
     {imgs:['uploads/foto/storia/02/653704599_26197923196496452_7334301565136658338_n.jpg','uploads/foto/storia/02/image00009.jpeg','uploads/foto/storia/02/image00033.jpeg'], alts:['Gulliver — la nostra storia','Gulliver — la nostra storia','Gulliver — la nostra storia']},
     {imgs:['uploads/foto/storia/03/image00166.jpeg','uploads/foto/storia/03/image00175.jpeg','uploads/foto/storia/03/photo-3-high.jpg'], alts:['Gulliver — la nostra storia','Gulliver — la nostra storia','Gulliver — la nostra storia']},
     {imgs:['uploads/foto/storia/04/photo-5-high.jpg','uploads/foto/storia/04/image00031.jpeg','uploads/foto/storia/04/image00095.jpeg'], alts:['Gulliver — la nostra storia','Gulliver — la nostra storia','Gulliver — la nostra storia']},
+  ];
+  const team=[
+    {name:'Peppe B.', role:'Fondatore, direttore tecnico · oltre 25 anni di vela', photo:'uploads/foto/team/portrait-1.jpg'},
+    {name:'Jaco C.', role:'Fondatore, responsabile corsi · oltre 25 anni di vela', photo:'uploads/foto/team/portrait-2.jpg'},
+    {name:'Marco L.', role:'Istruttore FIV, corsi ragazzi · 10+ anni di esperienza', photo:'uploads/foto/team/portrait-3.jpg'},
+    {name:'Sara V.', role:'Istruttrice FIV, corsi bambini · 8+ anni di esperienza', photo:'uploads/foto/team/portrait-4.jpg'},
+    {name:'Andrea P.', role:'Istruttore vela, corsi adulti · 12+ anni di esperienza', photo:'uploads/foto/team/portrait-5.jpg'},
+    {name:'Giulia M.', role:'Coordinatrice corsi estivi · 6+ anni in Gulliver', photo:'uploads/foto/team/portrait-6.jpg'},
+    {name:'Francesco T.', role:'Responsabile flotta e manutenzione · 15+ anni di vela', photo:'uploads/foto/team/portrait-7.jpg'},
+    {name:'Elena R.', role:'Segreteria e iscrizioni · punto di riferimento per le famiglie', photo:'uploads/foto/team/portrait-8.jpg'},
   ];
   return(
     <section className="about" id="storia" ref={ref}>
@@ -374,7 +440,72 @@ function About(){
                 <li key={t}><span className="chk"><IcoCheck/></span>{t}</li>
               ))}
             </ul>
-            <a href="#contatti" className="btn-dark">Scopri di più →</a>
+            <button type="button" className="btn-dark" onClick={()=>setMore(v=>!v)} aria-expanded={more}>
+              {more?'Mostra meno':'Scopri di più'} {more?'↑':'→'}
+            </button>
+          </div>
+        </div>
+        <div className={`about-more${more?' open':''}`} aria-hidden={!more}>
+          <div className="about-more-inner">
+            <div className="about-more-body">
+              <div className="about-block">
+                <div className="about-block-hd">
+                  <h3 className="about-block-title">La storia</h3>
+                  <p className="about-block-intro">Dal 1998 Gulliver porta la vela a Favignana: una storia fatta di passione, mare e generazioni di velisti cresciuti tra le acque delle Egadi.</p>
+                </div>
+                <div className="about-more-top">
+                  <div>
+                    <p className="sb">Da Peppe Bianco e Jaco Campo nasce la barca <strong>Aria</strong>, simbolo dell'associazione, e una scuola che oggi è un punto di riferimento per Favignana e per chi ama il mare.</p>
+                    <p className="sb">Ogni estate centinaia di bambini e ragazzi imparano a veleggiare tra Favignana, Levanzo e Marettimo, in un ambiente familiare dove sicurezza, gioco e spirito di equipaggio vanno di pari passo.</p>
+                    <p className="sb">Organizziamo corsi estivi, uscite didattiche, regate e giornate di vela per famiglie e turisti — sempre con le Egadi come palcoscenico naturale.</p>
+                  </div>
+                  <ul className="about-milestones">
+                    <li><strong>1998</strong><span>Fondazione dell'A.S.D. Gulliver a Favignana, dalla passione di Peppe e Jaco per la vela e per l'isola.</span></li>
+                    <li><strong>Oggi</strong><span>Scuola vela riconosciuta FIV, con istruttori qualificati e attività per bambini, ragazzi e adulti.</span></li>
+                    <li><strong>Le Egadi</strong><span>Il nostro campo di regata e la nostra aula: acque cristalline, venti favorevoli e un patrimonio naturalistico unico.</span></li>
+                  </ul>
+                </div>
+              </div>
+              <div className="about-block">
+                <div className="about-block-hd">
+                  <h3 className="about-block-title">Il nostro team</h3>
+                  <p className="about-block-intro">Dietro ogni uscita in mare c'è un gruppo di persone appassionate: fondatori, istruttori FIV e staff che ogni giorno rendono Gulliver una scuola accogliente e professionale.</p>
+                </div>
+                <div className="about-team-g">
+                  {team.map(({name,role,photo})=>(
+                    <div key={name} className="team-card">
+                      <img className="team-photo" src={photo} alt={name}/>
+                      <p className="team-name">{name}</p>
+                      <p className="team-role">{role}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="about-block" id="come-arrivare">
+                <div className="about-block-hd">
+                  <h3 className="about-block-title">Dove siamo</h3>
+                  <p className="about-block-intro">Siamo a Favignana, nel cuore delle Isole Egadi. La nostra base è il punto di partenza per ogni uscita in mare — facile da raggiungere in traghetto da Trapani.</p>
+                </div>
+                <div className="about-location-g">
+                  <div className="about-location-details">
+                    <div className="about-location-item">
+                      <span className="fdot"/>
+                      <span><strong>Indirizzo</strong>Via Punta Lunga, n° 4 — 91023 Favignana (TP)</span>
+                    </div>
+                    <div className="about-location-item">
+                      <span className="fdot"/>
+                      <span><strong>Come arrivare</strong>Traghetto da Trapani (~30 min). In stagione collegamenti frequenti con Favignana e Levanzo.</span>
+                    </div>
+                    <div className="about-location-item">
+                      <span className="fdot"/>
+                      <span><strong>Stagione</strong>Corsi e attività da maggio a ottobre, quando venti e condizioni di mare sono ideali per la vela.</span>
+                    </div>
+                    <a className="about-location-link" href="https://www.google.com/maps/place/A.S.D+Gulliver+scuola+vela+Favignana/@37.9252619,12.3272265,14z/data=!4m6!3m5!1s0x131be47574a69bd1:0x8a74831fc859f3b3!8m2!3d37.9186346!4d12.3231548!16s%2Fg%2F11gdm2lh57?entry=ttu&g_ep=EgoyMDI2MDYyMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">Apri su Google Maps →</a>
+                  </div>
+                  <img className="about-location-photo" src="uploads/foto/storia/01/sede-gulliver.jpg" alt="Base scuola vela Gulliver — Favignana"/>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -389,12 +520,16 @@ function Recensioni(){
     {name:'Maria R.', role:'Genitore · Corso Bambini', headline:'Non voleva più scendere dalla barca.', text:'Mio figlio ha fatto il corso estivo e non voleva più scendere dalla barca. Istruttori pazienti, ambiente sicuro e Favignana come palcoscenico — un\'esperienza che ripeteremo.', src:'uploads/foto/recensioni/image00060.jpeg'},
     {name:'Luca T.', role:'Allievo · 15 anni', headline:'La vela qui è un\'altra cosa.', text:'Ho imparato a regolare le vele e a lavorare in equipaggio. Le uscite tra Favignana e Levanzo sono spettacolari — la vela qui è un\'altra cosa.', src:'uploads/foto/recensioni/image00170.jpeg'},
     {name:'Elena & Marco', role:'Turisti · Corso Adulti', headline:'Ti fa sentire subito parte della barca.', text:'In una settimana abbiamo preso confidenza con il mare e con l\'isola vista dal basso. Gulliver ti fa sentire subito parte della barca, anche partendo da zero.', src:'uploads/foto/recensioni/image00092.jpeg'},
-    {name:'Giuseppe B.', role:'Allievo · Corso Estivo', headline:'Passione che si sente fin dal primo giorno.', text:'Professionalità e passione si sentono fin dal primo giorno. Piccoli gruppi, attenzione a ognuno e acque delle Egadi che parlano da sole.', src:'uploads/82900201_2720320201350082_1941680428767248384_n.jpg'},
   ];
   const len=data.length;
   const cur=data[idx];
   const prev=()=>setIdx(i=>(i-1+len)%len);
   const next=()=>setIdx(i=>(i+1)%len);
+  useEffect(()=>{
+    if(len<=1) return;
+    const t=setInterval(()=>setIdx(i=>(i+1)%len),7500);
+    return()=>clearInterval(t);
+  },[len,idx]);
   return(
     <section className="reviews" id="recensioni" ref={ref}>
       <div className="wrap reviews-wrap">
@@ -402,13 +537,15 @@ function Recensioni(){
         <div className={`reviews-split rv${on?' on':''}`}>
           <div className="reviews-text">
             <p className="reviews-label">— cosa dicono di noi —</p>
-            <div className="reviews-qmark" aria-hidden="true">&ldquo;</div>
-            <blockquote className="reviews-headline">&ldquo;{cur.headline}&rdquo;</blockquote>
-            <p className="reviews-body">{cur.text}</p>
-            <div className="reviews-stars" aria-label="5 stelle su 5">{'★'.repeat(5)}</div>
-            <p className="reviews-attr">{cur.name} — {cur.role}</p>
+            <div className="reviews-slide" key={`t-${idx}`}>
+              <div className="reviews-qmark" aria-hidden="true">&ldquo;</div>
+              <blockquote className="reviews-headline">&ldquo;{cur.headline}&rdquo;</blockquote>
+              <p className="reviews-body">{cur.text}</p>
+              <div className="reviews-stars" aria-label="5 stelle su 5">{'★'.repeat(5)}</div>
+              <p className="reviews-attr">{cur.name} — {cur.role}</p>
+            </div>
           </div>
-          <div className="reviews-media">
+          <div className="reviews-media reviews-slide" key={`m-${idx}`}>
             <img src={cur.src} alt={cur.name}/>
           </div>
         </div>
@@ -456,6 +593,7 @@ function Corsi(){
 
 function Egadi(){
   const[ref,on]=useReveal();
+  const[more,setMore]=useState(false);
   const carousels=[
     {imgs:['uploads/foto/egadi/01/87768377_2791681140880654_904454103185227776_n.jpg','uploads/foto/egadi/01/image00116.jpeg','uploads/foto/egadi/01/image00122.jpeg'], alts:['Isole Egadi — il nostro mare','Isole Egadi — il nostro mare','Isole Egadi — il nostro mare']},
     {imgs:['uploads/foto/egadi/02/86729173_2769202843128484_3915085246919344128_n.jpg','uploads/foto/egadi/02/image00120.jpeg','uploads/foto/egadi/02/image00173.jpeg'], alts:['Isole Egadi — il nostro mare','Isole Egadi — il nostro mare','Isole Egadi — il nostro mare']},
@@ -486,7 +624,41 @@ function Egadi(){
                 <li key={f.t}><span className="fdot"/><span><strong>{f.t} — </strong>{f.d}</span></li>
               ))}
             </ul>
-            <a href="#contatti" className="btn-dark">Scopri di più →</a>
+            <button type="button" className="btn-dark" onClick={()=>setMore(v=>!v)} aria-expanded={more}>
+              {more?'Mostra meno':'Scopri di più'} {more?'↑':'→'}
+            </button>
+          </div>
+        </div>
+        <div className={`about-more${more?' open':''}`} aria-hidden={!more}>
+          <div className="about-more-inner">
+            <div className="about-more-body">
+              <div className="about-block">
+                <div className="about-block-hd">
+                  <h3 className="about-block-title">Area marina protetta</h3>
+                  <p className="about-block-intro quoted">Le acque delle Egadi sono parte della più grande Area Marina Protetta d'Europa: un patrimonio da conoscere e rispettare, anche in barca.</p>
+                </div>
+                <div className="egadi-more-g">
+                  <div>
+                    <p className="sb">Navighiamo in un ecosistema unico, riconosciuto dall'UNESCO, dove posidonia, fondali e specie protette convivono con la tradizione marinara dell'arcipelago.</p>
+                    <p className="sb">Ogni uscita con Gulliver è anche un'occasione per imparare a veleggiare in modo responsabile: velocità moderate, ancoraggi corretti e attenzione alla vita marina che ci circonda.</p>
+                  </div>
+                  <img className="egadi-more-photo" src="uploads/foto/egadi/more/area-marina-protetta.jpg" alt="Tramonto in barca — uscita a vela alle Isole Egadi" style={{objectPosition:'50% 45%'}}/>
+                </div>
+              </div>
+              <div className="about-block">
+                <div className="about-block-hd">
+                  <h3 className="about-block-title">Trasferte nelle Egadi</h3>
+                  <p className="about-block-intro">Non restiamo solo a Favignana: organizziamo uscite e trasferte a vela verso le altre isole dell'arcipelago.</p>
+                </div>
+                <div className="egadi-more-g">
+                  <div>
+                    <p className="sb">Le uscite più belle portano verso Levanzo e Marettimo, tra calette nascoste, acqua cristallina e tramonti spettacolari — un modo unico di scoprire l'arcipelago dal mare.</p>
+                    <p className="sb">Durante la stagione proponiamo anche gite verso Formica e altre boe dell'arcipelago, per allievi più esperti e per chi vuole vivere la vela come avventura condivisa.</p>
+                  </div>
+                  <img className="egadi-more-photo" src="uploads/foto/egadi/more/trasferte-egadi.jpg" alt="Premiazione regata FIV — giovani velisti Gulliver"/>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -497,18 +669,14 @@ function Egadi(){
 function Galleria(){
   const[ref,on]=useReveal();
   const items=[
-    {src:'uploads/89342628_2809524742429627_6122163000670420992_n.jpg',alt:'Barca Aria — fondatori Peppe e Jaco',pos:'62% 68%'},
-    {src:'uploads/87768377_2791681140880654_904454103185227776_n.jpg',alt:'Panorama Isole Egadi — vista dal mare',pos:'48% 58%'},
-    {src:'uploads/82900201_2720320201350082_1941680428767248384_n.jpg',alt:'Equipaggio giovani in regata',pos:'44% 52%'},
-    {src:'uploads/86729173_2769202843128484_3915085246919344128_n.jpg',alt:'Mare cristallino di Favignana',pos:'50% 72%'},
-    {src:'uploads/83118431_2720317761350326_6301282524395995136_n.jpg',alt:'Corso bambini — primi passi in barca',pos:'28% 52%'},
-    {src:'uploads/83259385_2720318374683598_4156118863110471680_n.jpg',alt:'Corso ragazzi — regata tra le Egadi',pos:'58% 50%'},
-    {src:'uploads/87291280_2784439788271456_9081358994752143360_n.jpg',alt:'Corso adulti a bordo',fit:'contain'},
-    {src:'uploads/87171882_2784439691604799_2592698497614479360_n.jpg',alt:'Lezione di vela al tramonto',pos:'42% 68%'},
-    {src:'uploads/654296300_26233007932987978_5499749691394273174_n.jpg',alt:'Vela alle Isole Egadi',pos:'50% 58%'},
-    {src:'uploads/648890601_26107842295504543_6350789667420957433_n.jpg',alt:'Uscita in mare — scuola vela Gulliver',pos:'44% 56%'},
-    {src:'uploads/651012003_26134074679547971_7264768003055961002_n.jpg',alt:'Life on board — vita di bordo',fit:'contain'},
-    {src:'uploads/653704599_26197923196496452_7334301565136658338_n.jpg',alt:'Regata e spirito di squadra',pos:'36% 64%'},
+    {src:'uploads/foto/slideshow/1.jpg',alt:'Tramonto su Favignana — barche a riposo davanti alla scuola vela',pos:'50% 55%'},
+    {src:'uploads/foto/slideshow/2.jpg',alt:'Laser 4.7 in regata — vela tra le acque blu con l\'isola sullo sfondo',pos:'45% 50%'},
+    {src:'uploads/foto/slideshow/3.jpg',alt:'Corso bambini Optimist — lezione in una baia cristallina delle Egadi',pos:'50% 50%'},
+    {src:'uploads/foto/slideshow/4.jpg',alt:'Laser 4.7 in ormeggio — preparativi prima dell\'uscita in mare',pos:'50% 55%'},
+    {src:'uploads/foto/slideshow/5.jpg',alt:'Fila di Optimist in mare — uscita di gruppo della scuola vela Gulliver',pos:'50% 45%'},
+    {src:'uploads/foto/slideshow/6.jpg',alt:'Sorrisi estivi — i più piccoli della scuola vela a Favignana',pos:'50% 40%'},
+    {src:'uploads/foto/slideshow/7.jpg',alt:'Avventura in barca — i bambini scoprono il mare remando in acque calme',pos:'50% 50%'},
+    {src:'uploads/foto/slideshow/8.jpg',alt:'Baia turchese di Favignana — vela, spiaggia e montagne delle Egadi',pos:'50% 50%'},
   ];
   return(
     <section className="gallery" id="galleria" ref={ref}>
@@ -527,7 +695,7 @@ function Contact(){
   const set=(k,v)=>{ setF(p=>({...p,[k]:v})); setErrs(p=>{const n={...p};delete n[k];return n;}); };
   const submit=e=>{ e.preventDefault(); const er={}; if(!f.nome.trim())er.nome='Obbligatorio'; if(!f.email.includes('@'))er.email='Email non valida'; if(!f.msg.trim())er.msg='Obbligatorio'; if(Object.keys(er).length){setErrs(er);return;} setSent(true); };
   const info=[
-    {Icon:IcoPin, l:'Dove siamo', v:'Favignana, Isole Egadi — Sicilia'},
+    {Icon:IcoPin, l:'Dove siamo', v:'Via Punta Lunga, n° 4 — 91023 Favignana (TP)'},
     {Icon:IcoCal, l:'Stagione', v:'Giugno – Settembre'},
     {Icon:IcoMail, l:'Email', v:'info@gulliver-vela.it'},
     {Icon:IcoPhone, l:'Telefono', v:'+39 333 000 0000'},
@@ -606,9 +774,9 @@ function Footer(){
   const vidRef=useRef(null);
   useEffect(()=>{ const v=vidRef.current; if(v){ v.muted=true; v.play().catch(()=>{});} },[]);
   const cols=[
-    {t:'Scuola',ls:[['La Storia','#storia'],['I Corsi','#corsi'],['Le Egadi','#egadi'],['Galleria','#galleria'],['Contatti','#contatti']]},
+    {t:'Gulliver',ls:[['La Storia','#storia'],['Regolamento ASD','#'],['Galleria','#galleria']]},
     {t:'Corsi',ls:[['Corso Bambini','#corsi'],['Corso Ragazzi','#corsi'],['Corso Adulti','#corsi'],['Corsi Estivi','#corsi']]},
-    {t:'Informazioni',ls:[['Come arrivare','#'],['Calendario','#'],['Regolamento ASD','#'],['Privacy Policy','#']]},
+    {t:'Informazioni',ls:[['Come arrivare','#come-arrivare'],['Calendario','#'],['Privacy Policy','#']]},
   ];
   return(
     <footer className="footer">
@@ -636,14 +804,14 @@ function Footer(){
               </div>
             ))}
             <div className="fcontact">
-              <div className="fcontact-item">Favignana, Isole Egadi — Sicilia</div>
+              <div className="fcontact-item">Via Punta Lunga, n° 4 — 91023 Favignana (TP)</div>
               <div className="fcontact-item">info@gulliver-vela.it</div>
               <div className="fcontact-item">+39 333 000 0000</div>
               <p className="fcontact-note">Scrivici per informazioni, iscrizioni o per saperne di più sulla vita in mare alle Isole Egadi.</p>
               <div className="fsocial">
                 <a href="#" aria-label="Facebook"><IcoFb/></a>
                 <a href="#" aria-label="Instagram"><IcoIg/></a>
-                <a href="#" aria-label="YouTube"><IcoYt/></a>
+                <a href="https://www.youtube.com/watch?v=kR0OarxiGvo" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><IcoYt/></a>
               </div>
             </div>
           </div>
